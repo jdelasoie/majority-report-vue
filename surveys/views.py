@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponse
+from django.core import serializers
 
-from django.http import HttpResponse
+from surveys.models import Survey
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the surveys index.")
+    serialized_queryset = serializers.serialize('json', Survey.objects.all())
+    return JsonResponse(serialized_queryset, safe=False)
+
 
 def vote(request):
     return HttpResponse("Here we will have the ballot")

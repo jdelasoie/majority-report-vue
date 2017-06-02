@@ -1,7 +1,11 @@
-from django.conf.urls import url
+from rest_framework import viewsets
 
-import surveys.views
+from surveys.models import Survey
 
-urlpatterns = [
-    url(r'^$', surveys.views.index),
-]
+# ViewSets define the view behavior.
+from surveys.serializers import SurveySerializer
+
+
+class SurveyViewSet(viewsets.ModelViewSet):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
