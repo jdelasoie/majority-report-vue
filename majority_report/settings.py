@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpack_loader',
-    'majority_report'
+    'majority_report',
+    'surveys'
 ]
 
 MIDDLEWARE = [

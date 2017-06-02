@@ -21,7 +21,8 @@ import majority_report.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', majority_report.views.index)
+    url(r'^$', majority_report.views.index),
+    url(r'^surveys/', include('surveys.urls'))
 ]
 
 if settings.DEBUG:
