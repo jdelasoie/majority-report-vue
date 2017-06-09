@@ -4,7 +4,24 @@ from __future__ import unicode_literals
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 
-from surveys.models import Survey
+from rest_framework import viewsets
+from rest_framework import generics, mixins, views
+from surveys.models import Survey, Choice, Vote
+
+# ViewSets define the view behavior.
+from surveys.serializers import SurveySerializer, ChoiceSerializer
+
+
+class SurveyViewSet(viewsets.ModelViewSet):
+    queryset = Survey.objects.all()
+    serializer_class = SurveySerializer
+
+
+class ChoiceViewSet(viewsets.ModelViewSet):
+    queryset = Choice.objects.all()
+    serializer_class = Choice
+
+    # TODO: draw a custom choice form
 
 
 def index(request):

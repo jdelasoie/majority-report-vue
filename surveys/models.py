@@ -20,18 +20,18 @@ class Survey(models.Model):
 
 
 class Choice(models.Model):
-    survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE, related_name='choices')
     choice_text = models.CharField(max_length=50)
 
 
 class Vote(models.Model):
-    REJECT = "REJECT"
-    INSUFFISANT = "INSUFFISANT"
-    PASSABLE = "PASSABLE"
-    ASSEZ_BIEN = "ASSEZ_BIEN"
-    BIEN = "BIEN"
-    TRES_BIEN = "TRES_BIEN"
-    EXCELLENT = "EXCELLENT"
+    REJECT = 1
+    INSUFFISANT = 2
+    PASSABLE = 3
+    ASSEZ_BIEN = 4
+    BIEN = 5
+    TRES_BIEN = 6
+    EXCELLENT = 7
 
     JUDGMENT_CHOICES = (
         (REJECT, "A rejeter"),
@@ -44,5 +44,7 @@ class Vote(models.Model):
     )
 
     voter = models.ForeignKey(User)
-    judgment = models.CharField(max_length=55,
-                                choices=JUDGMENT_CHOICES)
+    choice = models.ForeignKey(Choice, related_name="votes")
+    judgment = models.IntegerField(max_length=2,
+                                choices=JUDGMENT_CHOICES,
+                                default=REJECT)

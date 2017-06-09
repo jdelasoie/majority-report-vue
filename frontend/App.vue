@@ -1,18 +1,18 @@
 <template>
     <div id="app">
-        <div v-for="survey in surveys">
+        <div v-for="survey in surveys" :key="survey.id">
             <div>
               {{ survey.title }}
             </div>
             <div>
-              {{ survey.url }}
-            </div>
-            <div>
               {{ survey.comment }}
             </div>
+            <div v-for="choice in surveys.choice">
+                <a v-bind:href="choice ">vote for {{ choice }}</a>
+            </div>
         </div>
-
     </div>
+
 </template>
 
 <script>

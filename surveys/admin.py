@@ -7,7 +7,6 @@ from surveys.models import Survey, Vote, Choice
 
 
 class ChoiceInline(admin.TabularInline):
-
     model = Choice
 
 
